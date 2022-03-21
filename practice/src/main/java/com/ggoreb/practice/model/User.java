@@ -23,10 +23,4 @@ public class User {
 	String email;
 	String pwd;
 	String name;
-	
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-	List<Question> questions = new ArrayList<>();
-
-	@OneToMany(mappedBy = "user")
-	List<Answer> answers = new ArrayList<>();
 }

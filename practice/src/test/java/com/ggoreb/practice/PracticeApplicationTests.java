@@ -18,13 +18,11 @@ class PracticeApplicationTests {
 	@Test @Transactional
 	void contextLoads() {
 	  List<User> users = userRepository.findAll();
-	  System.out.println(users.get(0).getQuestions());
 	}
 
 	@Test @Transactional
 	void contextLoads2() {
 	  List<User> users = userRepository.findAll();
-	  System.out.println(users.get(0).getAnswers());
 	}
 	
 }

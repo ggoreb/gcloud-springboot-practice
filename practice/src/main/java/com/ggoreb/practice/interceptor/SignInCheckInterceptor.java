@@ -1,5 +1,7 @@
 package com.ggoreb.practice.interceptor;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,16 @@ public class SignInCheckInterceptor implements HandlerInterceptor {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     log.debug("preHandle");
     HttpSession session = request.getSession();
+    
+    System.out.println( request.getRequestURL() );
+    System.out.println( request.getRequestURI() );
+    System.out.println( request.getParameter("returnURL") );
+    Enumeration<String> e = request.getParameterNames();
+    while(e.hasMoreElements()) {
+      String name = e.nextElement();
+      System.out.println( request.getParameter(name) );
+    }
+    
     User user = (User) session.getAttribute("user");
     if (user == null) {
       response.sendRedirect("/signin");

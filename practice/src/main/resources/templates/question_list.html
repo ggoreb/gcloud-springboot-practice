@@ -34,19 +34,19 @@
         </tr>
         </thead>
         <tbody>
-        <th:block th:if="${#lists.size('list')} > 0">
+        <th:block th:if="${#lists.size(list)} > 0">
         	<tr th:each="question : ${list}" class="text-center">
         		<td th:text="${question.id}"></td>
 	            <td class="text-left">
 	                <a th:href="@{/question/detail(id=${question.id})}" th:text="${question.subject}"></a>
 	                <span class="text-danger small ml-2" 
-                          th:text="${#lists.size(question.answers)}"></span>
+s                          th:text="${#lists.size(question.answers)}"></span>
 	            </td>
 	            <td th:text="${question.user.name}"></td>
 	            <td th:text="${question.createDate}"></td>
         	</tr>
         </th:block>
-        <th:block th:unless="${#lists.size('list')} > 0">
+        <th:block th:unless="${#lists.size(list)} > 0">
 	        <tr>
 	            <td colspan="3">질문이 없습니다.</td>
 	        </tr>
