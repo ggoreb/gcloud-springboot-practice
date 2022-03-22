@@ -19,6 +19,16 @@ import com.ggoreb.practice.repository.UserRepository;
 public class UserController {
 	@Autowired
 	UserRepository userRepository;
+
+  @GetMapping("/user/info")
+  public String userInfo(Model model, HttpSession session) {
+    User u = (User) session.getAttribute("user");
+    
+    User user = userRepository.findById(u.getId()).get();
+    model.addAttribute("user", user);
+    
+    return "user_info";
+  }
 	
 	@GetMapping("/signup")
 	public String signup() {

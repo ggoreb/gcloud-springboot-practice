@@ -23,4 +23,21 @@ public class User {
 	String email;
 	String pwd;
 	String name;
+	
+	@OneToMany(mappedBy = "user")
+//	List<Question> questions; // 가능하지만 권장X, 나중에 오류 발생 가능성
+	List<Question> questions = new ArrayList<>();
+
+	@OneToMany(mappedBy = "user")
+	List<Answer> answers = new ArrayList<>();
 }
+
+
+
+
+
+
+
+
+
+
