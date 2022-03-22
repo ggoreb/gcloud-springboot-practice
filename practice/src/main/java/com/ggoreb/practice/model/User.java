@@ -24,6 +24,10 @@ public class User {
 	String pwd;
 	String name;
 	
+	// ManyToOne 으로 연결되어 있으면 mappedBy 사용
+	// 양방향
+	// JUnit에서는 EAGER 옵션 또는 @Transactional 사용
+	// Thymeleaf에서는 EAGER 옵션 사용하지 않아도 동작
 	@OneToMany(mappedBy = "user")
 //	List<Question> questions; // 가능하지만 권장X, 나중에 오류 발생 가능성
 	List<Question> questions = new ArrayList<>();

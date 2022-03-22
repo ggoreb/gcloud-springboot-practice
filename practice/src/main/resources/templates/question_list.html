@@ -40,7 +40,7 @@
 	            <td class="text-left">
 	                <a th:href="@{/question/detail(id=${question.id})}" th:text="${question.subject}"></a>
 	                <span class="text-danger small ml-2" 
-s                          th:text="${#lists.size(question.answers)}"></span>
+                          th:text="${#lists.size(question.answers)}"></span>
 	            </td>
 	            <td th:text="${question.user.name}"></td>
 	            <td th:text="${question.createDate}"></td>

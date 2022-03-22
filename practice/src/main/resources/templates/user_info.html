@@ -34,9 +34,9 @@
         </thead>
         <tbody>
           <tr>
-            <td th:text="${session.user.name}"></td>
-            <td th:text=""></td>
-            <td th:text=""></td>
+            <td th:text="${ session.user.name }"></td>
+            <td th:text="${ #lists.size(user.questions) }"></td>
+            <td th:text="${ #lists.size(user.answers) }"></td>
           </tr>
         </tbody>
     </table>

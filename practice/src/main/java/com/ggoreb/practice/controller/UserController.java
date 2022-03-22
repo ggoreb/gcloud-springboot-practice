@@ -21,10 +21,12 @@ public class UserController {
 	UserRepository userRepository;
 
   @GetMapping("/user/info")
-  public String userInfo(Model model, HttpSession session) {
+  public String userInfo(
+      Model model, HttpSession session) {
     User u = (User) session.getAttribute("user");
     
-    User user = userRepository.findById(u.getId()).get();
+    User user = 
+        userRepository.findById(u.getId()).get();
     model.addAttribute("user", user);
     
     return "user_info";
