@@ -6,11 +6,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ggoreb.practice.model.User;
 import com.ggoreb.practice.repository.UserRepository;
@@ -20,6 +20,13 @@ public class UserController {
 	@Autowired
 	UserRepository userRepository;
 
+  @GetMapping("/user/check")
+  @ResponseBody   // JSON 응답
+  public User userCheck(String email) {
+    User user = userRepository.findByEmail(email);
+    return user;
+  }
+	
   @GetMapping("/user/info")
   public String userInfo(
       Model model, HttpSession session) {
@@ -31,7 +38,7 @@ public class UserController {
     
     return "user_info";
   }
-	
+  
 	@GetMapping("/signup")
 	public String signup() {
 		return "signup";

@@ -30,10 +30,28 @@ public class QuestionController {
 
   @Autowired
   AnswerRepository answerRepository;
-
+  
+  @GetMapping("/etc")
+  public String question(
+      Model model, // View Template에게 데이터를 전달하기 위해서
+      @ModelAttribute User user, // 요청 파라미터를 객체로 받기 위해서 (DTO, VO)
+      @RequestParam String id, // 요청 파라미터를 1개만 명시적으로 받기 위해서
+      String name // @RequestParam과 동일
+      ) {
+    return "etc";
+  }
+  
+  @GetMapping("/question/delete")
+  public String questionDelete(Long id) {
+//    answerRepository.delete..
+    
+    questionRepository.deleteById(id);
+    
+    return "redirect:/question/list";
+  }
+  
   @GetMapping("/question/update") // /question/update?id=1 100
   public String questionUpdate(Long id, Model model) {
-    
     Optional<Question> opt = questionRepository.findById(id);
     // 조회한 질문이 존재한다면 (엉뚱한 id 조회 시 존재하지 않을 수 있음)
     if(opt.isPresent()) {
@@ -96,21 +114,6 @@ public class QuestionController {
 
     model.addAttribute("list", list);
     return "question_list";
-  }
-
-  @GetMapping("/question/create")
-  public String questionCreate() {
-    return "question_create";
-  }
-
-  @PostMapping("/question/create")
-  public String questionCreatePost(@ModelAttribute Question question, HttpSession session) {
-    User user = (User) session.getAttribute("user");
-
-    question.setUser(user);
-    question.setCreateDate(new Date());
-    questionRepository.save(question);
-    return "redirect:/question/list";
   }
 
   @GetMapping("/question/detail")

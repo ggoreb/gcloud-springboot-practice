@@ -8,4 +8,7 @@ import com.ggoreb.practice.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByEmailAndPwd(String email, String pwd);
+	
+	User findByEmail(String email);
+	
 }
