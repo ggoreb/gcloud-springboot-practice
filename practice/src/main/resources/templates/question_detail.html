@@ -35,7 +35,9 @@
                 <div th:text="${question.createDate}"></div>
               </div>
             </div>
-            <img th:src="@{/download(id=${param.id})}">
+            <img th:src="@{/download(id=${param.id})}"
+                 style="width:100%;"
+                 onerror="this.src='/noimage.png'">
 
             <th:block th:if="${session.user != null}">
               <div th:if="${session.user.name} == ${question.user.name}" class="my-3">
