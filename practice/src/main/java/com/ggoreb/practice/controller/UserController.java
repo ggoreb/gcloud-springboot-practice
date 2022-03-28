@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ggoreb.practice.config.HttpSessionCheckingListener;
 import com.ggoreb.practice.model.User;
 import com.ggoreb.practice.repository.UserRepository;
 
@@ -19,6 +20,9 @@ import com.ggoreb.practice.repository.UserRepository;
 public class UserController {
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	HttpSessionCheckingListener httpSessionCheckingListener;
 
   @GetMapping("/user/check")
   @ResponseBody   // JSON 응답
@@ -54,10 +58,18 @@ public class UserController {
 	}
 	@PostMapping("/signin")
 	public String signinPost(@ModelAttribute User user, HttpSession session) {
-		Optional<User> opt = userRepository.findByEmailAndPwd(user.getEmail(), user.getPwd());
+	  
+	  Optional<User> opt = userRepository.findByEmailAndPwd(user.getEmail(), user.getPwd());
 		if(opt.isPresent()) {
 			session.setAttribute("user", opt.get());
 		}
+		
+		// 첫 로그인이라면 (중복이 아니라면)
+		if(!httpSessionCheckingListener.isLogin(user.getEmail())) {
+		  httpSessionCheckingListener.addUser(user.getEmail(), session);
+		}
+		
+		
 		return "redirect:/question/list";
 	}
 	@GetMapping("/signout")

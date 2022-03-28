@@ -23,14 +23,14 @@ public class SignInCheckInterceptor implements HandlerInterceptor {
     log.debug("preHandle");
     HttpSession session = request.getSession();
     
-    System.out.println( request.getRequestURL() );
-    System.out.println( request.getRequestURI() );
-    System.out.println( request.getParameter("returnURL") );
-    Enumeration<String> e = request.getParameterNames();
-    while(e.hasMoreElements()) {
-      String name = e.nextElement();
-      System.out.println( request.getParameter(name) );
-    }
+//    System.out.println( request.getRequestURL() );
+//    System.out.println( request.getRequestURI() );
+//    System.out.println( request.getParameter("returnURL") );
+//    Enumeration<String> e = request.getParameterNames();
+//    while(e.hasMoreElements()) {
+//      String name = e.nextElement();
+//      System.out.println( request.getParameter(name) );
+//    }
     
     User user = (User) session.getAttribute("user");
     if (user == null) {

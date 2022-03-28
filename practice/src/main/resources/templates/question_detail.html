@@ -35,6 +35,7 @@
                 <div th:text="${question.createDate}"></div>
               </div>
             </div>
+            
             <img th:src="@{/download(id=${param.id})}"
                  style="width:100%;"
                  onerror="this.src='/noimage.png'">
